@@ -49,9 +49,9 @@ public class RestAdapterTest {
     OkHttpClient client = new OkHttpClient();
 
     example = new RestAdapter.Builder() //
-        .setClient(client)
-        .setCallbackExecutor(new SynchronousExecutor())
-        .setEndpoint(server.getUrl("/").toString())
+        .client(client)
+        .callbackExecutor(new SynchronousExecutor())
+        .endpoint(server.getUrl("/").toString())
         .build()
         .create(Example.class);
   }
@@ -64,7 +64,7 @@ public class RestAdapterTest {
 
   @Test public void interfaceWithExtendIsNotSupported() {
     try {
-      new RestAdapter.Builder().setEndpoint("http://foo/").build().create(InvalidExample.class);
+      new RestAdapter.Builder().endpoint("http://foo/").build().create(InvalidExample.class);
       fail();
     } catch (IllegalArgumentException e) {
       assertThat(e).hasMessage("Interface definitions must not extend other interfaces.");
